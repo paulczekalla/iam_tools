@@ -12,7 +12,7 @@ proxies = {
 filename = "low_running_lineitems.csv"
 
 http = HttpHandler(proxies)
-a = Auth("auth", "here")
+a = Auth("Auth", "here")
 
 token = a.readResponse(a.authorizationRequest(http))
 http.setToken(token)
@@ -22,7 +22,7 @@ count = http.getRequestPage(0, "line-item").json()['response']['count']
 
 allLineItems = list()
 
-for start_element in range(0, count, 100):
+for start_element in range(4500, count, 100):
 	lineItemsNew = http.getRequestPage(start_element, "line-item").json()['response']['line-items']
 	allLineItems.append(lineItemsNew)
 
@@ -43,15 +43,18 @@ writer_content = list()
 writer_content.append('Id;Name;Start;Ende;\n')
 
 # Low running items
-for lineItem in lowRunningWorker.check_low_running_items(allLineItems):
-	if lineItem['state'] != 'inactive':
-		writer_content.append(str(lineItem['id']) + ';' + lineItem['name'] + ';' + lineItem['start_date'].split(" ")[0] + ';' + lineItem['end_date'].split(" ")[0] + ';\n')
-
 writer_content.append('\n')
 writer_content.append('Low running Lineitems \n')		
 writer_content.append('\n')
 
+for lineItem in lowRunningWorker.check_low_running_items(allLineItems):
+	if lineItem['state'] != 'inactive':
+		writer_content.append(str(lineItem['id']) + ';' + lineItem['name'] + ';' + lineItem['start_date'].split(" ")[0] + ';' + lineItem['end_date'].split(" ")[0] + ';\n')
+
 # Never running items
+writer_content.append('\n')
+writer_content.append('Never run Lineitems \n')		
+writer_content.append('\n')
 
 for lineItem in lowRunningWorker.check_never_running_items(allNeverLineItems):
 	if lineItem['end_date'] is not None:
@@ -60,6 +63,10 @@ for lineItem in lowRunningWorker.check_never_running_items(allNeverLineItems):
 		writer_content.append(str(lineItem['id']) + ';' + lineItem['name'] + ';' + lineItem['start_date'].split(" ")[0] + ';' + 'Kein Enddatum;\n')
 
 fw = FileWriter(filename, 'w')
-for liste in writer_content:
-	print(liste)
-	fw.writeInNewFile(liste)
+
+for line in writer_content:
+	print(line)
+	print("---")
+	fw.writeInNewFile(line)
+
+fw.closeFile()

@@ -1,4 +1,5 @@
-﻿import time
+﻿from time import time
+import sys
 
 class Auth:
 
@@ -49,7 +50,11 @@ class Auth:
 			else:
 				print("Something went wrong. Check Auth Module")
 		else:
-			print("Auth again in 15 seconds")
-			time.sleep(15)
-			self.readResponse(self.authorizationRequest())
+			if 'No match found for user/pass' in response_json['error']:
+				print('Wrong credentials. Exiting program.')
+				sys.exit(0)
+			else:
+				print("Auth again in 15 seconds")
+				time.sleep(15)
+				self.readResponse(self.authorizationRequest())
 			
