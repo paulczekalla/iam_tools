@@ -8,11 +8,14 @@ class FileWriter:
 		self.fileInstance = self.generateFileInstanceWithNewFile()
 	
 	def generateFileInstanceWithNewFile(self):
+		filename = self.generateFilename()
+		return open(filename, self.fileRights)
+
+	def generateFilename(self):
 		time_now = datetime.now()
 		ts_date = str(time_now.year) + str(time_now.month) + str(time_now.day)
 		ts_time = str(time_now.hour) + str(time_now.minute) + str(time_now.second)
-		filename = self.baseFilename.split('.')[0] + '_' + ts_date + '_' + ts_time + '.' + self.baseFilename.split('.')[1]
-		return open(filename, self.fileRights)
+		return self.baseFilename.split('.')[0] + '_' + ts_date + '_' + ts_time + '.' + self.baseFilename.split('.')[1]
 	
 	def writeInNewFile(self, fileContent):
 		for line in fileContent:
