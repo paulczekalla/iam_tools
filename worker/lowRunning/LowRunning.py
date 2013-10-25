@@ -50,6 +50,7 @@ class LowRunning:
 					allNeverRunLineItems.append(lineItem)
 						
 				else:
-					print("not valid")
+					#print("not valid")
+					pass
 
 		return allNeverRunLineItems

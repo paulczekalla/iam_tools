@@ -1,6 +1,5 @@
 import os
-import time
-import datetime
+from datetime import datetime, date, time
 
 class FileWriter:
 	def __init__(self, filename, fileRights):
@@ -9,10 +8,19 @@ class FileWriter:
 		self.fileInstance = self.generateFileInstanceWithNewFile()
 	
 	def generateFileInstanceWithNewFile(self):
-		ts = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d_%H-%M')
-		filename = self.baseFilename.split('.')[0] + '_' + ts + '.' + self.baseFilename.split('.')[1]
+		time_now = datetime.now()
+		ts_date = str(time_now.year) + str(time_now.month) + str(time_now.day)
+		ts_time = str(time_now.hour) + str(time_now.minute) + str(time_now.second)
+		filename = self.baseFilename.split('.')[0] + '_' + ts_date + '_' + ts_time + '.' + self.baseFilename.split('.')[1]
 		return open(filename, self.fileRights)
 	
 	def writeInNewFile(self, fileContent):
 		for line in fileContent:
-			self.fileInstance.write(line)
+			try:
+				self.fileInstance.write(line)
+			except:
+				print("Error occured while writing into file")
+				self.closeFile()
+		
+	def closeFile(self):
+		self.fileInstance.close()
