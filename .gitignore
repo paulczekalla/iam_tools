@@ -1,0 +1,9 @@
+lib/Credentials.txt
+lib/__pycache__/__init__.cpython-33.pyc
+lib/__pycache__/auth.cpython-33.pyc
+lib/__pycache__/fileWriter.cpython-33.pyc
+lib/__pycache__/httpHandler.cpython-33.pyc
+worker/lowRunning/__pycache__/LowRunning.cpython-33.pyc
+worker/siphon/__pycache__/SiphonDownloader.cpython-33.pyc
+worker/siphon/__pycache__/feedGenerator.cpython-33.pyc
+worker/siphon/__pycache__/feedViewer.cpython-33.pyc
