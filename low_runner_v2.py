@@ -1,8 +1,21 @@
-import json
-from lib.auth import Auth
+﻿import json
+from lib.auth import Auth, AuthException
 from lib.httpHandler import HttpHandler
 from lib.fileWriter import FileWriter
 from worker.lowRunning.LowRunning import LowRunning
+
+def aquireAuthToken(authObj, http):
+	token = ""
+	try:
+		token = authObj.readResponse(authObj.authorizationRequest(http))
+	except AuthException as e:
+		print("Login mit Zugang {} nicht möglich.".format(e.login))
+		print("Zugangsdaten erneut eingeben: ")
+		login = input("Login: ")
+		password = input("Passwort: ")
+		aquireAuthToken(Auth(login, password), http)
+	else:
+		http.setToken(token)
 
 proxies = {
   "http": "http://proxy.t-online.net:3128",
@@ -12,12 +25,11 @@ proxies = {
 filename = "low_running_lineitems.csv"
 
 http = HttpHandler(proxies)
-a = Auth("Auth", "here")
 
-token = a.readResponse(a.authorizationRequest(http))
-http.setToken(token)
+a = Auth("a", "b")
 
-		
+aquireAuthToken(a, http)
+
 count = http.getRequestPage(0, "line-item").json()['response']['count']
 
 allLineItems = list()
@@ -34,8 +46,8 @@ allNeverLineItems = list()
 for start_element in range(0, count, 100):
 	params = {'never_run':'true'}
 	lineItemsNew = http.getRequestPage(start_element, "line-item", params).json()['response']['line-items']
-	allNeverLineItems.append(lineItemsNew)					
-			
+	allNeverLineItems.append(lineItemsNew)
+
 
 lowRunningWorker = LowRunning()
 
@@ -44,7 +56,7 @@ writer_content.append('Id;Name;Start;Ende;\n')
 
 # Low running items
 writer_content.append('\n')
-writer_content.append('Low running Lineitems \n')		
+writer_content.append('Low running Lineitems \n')
 writer_content.append('\n')
 
 for lineItem in lowRunningWorker.check_low_running_items(allLineItems):
@@ -53,7 +65,7 @@ for lineItem in lowRunningWorker.check_low_running_items(allLineItems):
 
 # Never running items
 writer_content.append('\n')
-writer_content.append('Never run Lineitems \n')		
+writer_content.append('Never run Lineitems \n')
 writer_content.append('\n')
 
 for lineItem in lowRunningWorker.check_never_running_items(allNeverLineItems):

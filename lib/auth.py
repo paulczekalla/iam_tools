@@ -51,10 +51,20 @@ class Auth:
 				print("Something went wrong. Check Auth Module")
 		else:
 			if 'No match found for user/pass' in response_json['error']:
-				print('Wrong credentials. Exiting program.')
-				sys.exit(0)
+				raise AuthException(self._username)
+				#print('Wrong credentials. Exiting program.')
+				#sys.exit(0)
 			else:
 				print("Auth again in 15 seconds")
 				time.sleep(15)
 				self.readResponse(self.authorizationRequest())
-			
+
+
+# Import was kinda broken, so this Exception-class is (now) part of this file
+class AuthException(Exception):
+
+	def __init__(self, login):
+		self.login = login
+	
+	def __str__(self):
+		return "Login mit Credentials nicht möglich"
