@@ -7,3 +7,11 @@ worker/lowRunning/__pycache__/LowRunning.cpython-33.pyc
 worker/siphon/__pycache__/SiphonDownloader.cpython-33.pyc
 worker/siphon/__pycache__/feedGenerator.cpython-33.pyc
 worker/siphon/__pycache__/feedViewer.cpython-33.pyc
+res/static.txt
+temp/
+lib/__pycache__/auth.cpython-33.pyc
+lib/__pycache__/fileWriter.cpython-33.pyc
+worker/siphon/__pycache__/
+lib/__pycache__/httpHandler.cpython-33.pyc
+worker/generic/__pycache__/AbstractGenericWorker.cpython-33.pyc
+low_running_lineitems*.csv

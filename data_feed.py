@@ -1,14 +1,27 @@
-import json
-from lib.auth import Auth
+﻿import json
+from lib.auth import Auth,AuthException
+
 from lib.httpHandler import HttpHandler
 from worker.siphon.feedGenerator import FeedGenerator
 from worker.siphon.SiphonDownloader import SiphonDownloader
 
-http = HttpHandler()
-a = Auth("auth", "here")
+def aquireAuthToken(authObj, http):
+	token = ""
+	try:
+		token = authObj.readResponse(authObj.authorizationRequest(http))
+	except AuthException as e:
+		print("Login mit Zugang {} nicht möglich.".format(e.login))
+		print("Zugangsdaten erneut eingeben: ")
+		login = input("Login: ")
+		password = input("Passwort: ")
+		aquireAuthToken(Auth(login, password), http)
+	else:
+		http.setToken(token)
 
-token = a.readResponse(a.authorizationRequest(http))
-http.setToken(token)
+http = HttpHandler()
+
+a = Auth("a", "b")
+aquireAuthToken(a, http)
 
 allDataFeeds = FeedGenerator(http)
 downloader = SiphonDownloader("temp", http)
