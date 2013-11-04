@@ -1,4 +1,7 @@
+
 lib/Credentials.txt
 worker/siphon/__pycache__/SiphonDownloader.cpython-33.pyc
 worker/siphon/__pycache__/feedGenerator.cpython-33.pyc
 worker/siphon/__pycache__/feedViewer.cpython-33.pyc
+res/static.txt
+temp/bid_landscape_feed_2013_10_19_13_20131019145233_0.csv
