@@ -1,0 +1,4 @@
+lib/Credentials.txt
+worker/siphon/__pycache__/SiphonDownloader.cpython-33.pyc
+worker/siphon/__pycache__/feedGenerator.cpython-33.pyc
+worker/siphon/__pycache__/feedViewer.cpython-33.pyc
