@@ -69,7 +69,6 @@ class HttpHandler:
 		
 		if self._token is not None:
 			header = {'Authorization':self._token}
-			
 			return requests.post(url, headers=header, data=json.dumps(payload))
 		
 		return requests.post(url, data=json.dumps(payload))
@@ -92,6 +91,24 @@ class HttpHandler:
 		
 		if self._token is not None:
 			header = {'Authorization':self._token}
-			
 			return requests.put(url, headers=header, data=json.dumps(payload))
-		return requests.put(url, data=json.dumps(payload))
+
+		
+	def deleteRequest(self, service=None, params=None):
+		if service is None:
+			service = self._service
+			
+		url = self._baseUrl + "/" + service
+
+		if params is not None:
+			first_param = params.popitem()
+			url += "?{0}={1}".format(first_param[0], first_param[1])
+			
+			for k,v in params.items():
+				url += "&" + k + "=" + v
+
+		print("URL: " + url)
+		
+		if self._token is not None:
+			header = {'Authorization':self._token}
+			return requests.delete(url, headers=header)

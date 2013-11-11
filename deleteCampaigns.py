@@ -49,12 +49,15 @@ writer_content.append('Id;Name;Start;\n')
 
 
 for validCampaign in neverRunCampaignWorker.check_if_opt_campaign_never_run(deletedCampaigns):
-	writer_string = str(validCampaign['id']) + ';' + validCampaign['name'] + ';'
-	if validCampaign['start_date'] is not None:
-		writer_string += validCampaign['start_date'].split(" ")[0]
-	writer_string += ';\n'
+	params = {'id':str(validCampaign['id']), 'advertiser_id':str(validCampaign['advertiser_id'])}
+	status = http.deleteRequest("campaign", params).json()['response']['status']
+	if status == 'OK':
+		writer_string = str(validCampaign['id']) + ';' + validCampaign['name'] + ';'
+		if validCampaign['start_date'] is not None:
+			writer_string += validCampaign['start_date'].split(" ")[0]
+		writer_string += ';\n'
 
-	writer_content.append(writer_string)
+		writer_content.append(writer_string)
 	
 fw = FileWriter(filename, 'w')
 
