@@ -13,6 +13,6 @@ class NeverRunCampaign:
 				if campaign['name'].startswith('O_') and campaign['stats'] is None:
 					if campaign['start_date'] is not None:
 						date = campaign['start_date'].split(" ")[0].split("-")
-						if int(date[2]) == 2012 or int(date[1]) < 9:
+						if int(date[0]) == 2012 or int(date[1]) < 9:
 							deletedCampaigns.append(campaign)
 		return deletedCampaigns
