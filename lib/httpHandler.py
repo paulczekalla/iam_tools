@@ -21,11 +21,9 @@ class HttpHandler:
 		url = self._baseUrl + "/" + service
 		
 		if params is not None:
-			first_param = params.popitem()
-			url += "?{0}={1}".format(first_param[0], first_param[1])
-			
+			url += "?"
 			for k,v in params.items():
-				url += "&" + k + "=" + v
+				url += k + "=" + v + "&"
 		print("URL: " + url)
 				
 		if self._token is not None:
@@ -42,9 +40,6 @@ class HttpHandler:
 		url = self._baseUrl + "/" + service + "?start_element=" + str(paginationStartNumer)
 
 		if params is not None:
-			first_param = params.popitem()
-			url += "&{0}={1}".format(first_param[0], first_param[1])
-			
 			for k,v in params.items():
 				url += "&" + k + "=" + v
 
