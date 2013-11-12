@@ -23,7 +23,9 @@ http = HttpHandler()
 a = Auth("a", "b")
 aquireAuthToken(a, http)
 
-allDataFeeds = FeedGenerator(http)
+feedTypes = ("segment_feed")
+
+allDataFeeds = FeedGenerator(http, feedTypes)
 downloader = SiphonDownloader("temp", http)
 download_links = allDataFeeds.generateLocationRequests(allDataFeeds.getFeeds())
 for params in download_links:

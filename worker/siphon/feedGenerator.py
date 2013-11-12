@@ -2,12 +2,10 @@ import json
 
 class FeedGenerator:
 
-	def __init__(self, http = None):
+	def __init__(self, http = None, feedTypes = ("standard_feed", "bid_landscape_feed","segment_feed", "custom_data_feed")):
 		self.http = http
 		self.service = 'siphon'
-
-		#self.feedTypes = ("standard_feed", "bid_landscape_feed","segment_feed", "custom_data_feed")
-		self.feedTypes = ("segment_feed")
+		self.feedTypes = feedTypes
 		self.ready_for_download = ("new", "pending", "in_progress", "completed")
 
 	def getFeeds(self):
