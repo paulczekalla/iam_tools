@@ -25,7 +25,7 @@ proxies = {
 
 filename = "newtension_creatives.csv"
 
-http = HttpHandler(proxies)
+http = HttpHandler(proxies, "http://api.appnexus.com")
 
 a = Auth("a", "b")
 

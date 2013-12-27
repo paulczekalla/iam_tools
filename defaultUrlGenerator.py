@@ -24,7 +24,7 @@ http = HttpHandler()
 a = Auth('Auth', 'here')
 aquireAuthToken(a, http)
 
-worker = AbstractGenericWorker(http)
+worker = AbstractGenericWorker(http, "http://api.appnexus.com")
 
 placements = worker.getAllEntitiesByType('placement')
 

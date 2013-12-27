@@ -24,7 +24,7 @@ proxies = {
 
 filename = "new_site_types.csv"
 
-http = HttpHandler(proxies)
+http = HttpHandler(proxies, "http://api.appnexus.com")
 
 a = Auth("a", "b")
 

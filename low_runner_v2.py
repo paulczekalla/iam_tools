@@ -24,7 +24,7 @@ proxies = {
 
 filename = "low_running_lineitems.csv"
 
-http = HttpHandler(proxies)
+http = HttpHandler(proxies, "http://api.appnexus.com")
 
 a = Auth("a", "b")
 
@@ -34,7 +34,7 @@ count = http.getRequestPage(0, "line-item").json()['response']['count']
 
 allLineItems = list()
 
-for start_element in range(4500, count, 100):
+for start_element in range(0, count, 100):
 	lineItemsNew = http.getRequestPage(start_element, "line-item").json()['response']['line-items']
 	allLineItems.append(lineItemsNew)
 

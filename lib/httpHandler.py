@@ -3,8 +3,9 @@ import json
 
 class HttpHandler:
 	
-	def __init__(self, baseUrl = None, service = None, token = None):
+	def __init__(self, proxies = None, baseUrl = None, service = None, token = None):
 		self._token = token
+		self._proxies = proxies
 		self._baseUrl = baseUrl
 		self._service = service
 		
@@ -24,12 +25,12 @@ class HttpHandler:
 			url += "?"
 			for k,v in params.items():
 				url += k + "=" + v + "&"
-		print("URL: " + url)
+		print("GET " + url)
 				
 		if self._token is not None:
 			auth = 'authorization:'+self._token
 			header = {'authorization':self._token}
-			return requests.get(url, headers=header)
+			return requests.get(url, headers=header, proxies=self._proxies)
 		else:
 			print("No Authorization Token is set")	
 		
@@ -43,12 +44,12 @@ class HttpHandler:
 			for k,v in params.items():
 				url += "&" + k + "=" + v
 
-		print("URL: " + url)
+		print("GET " + url)
 				
 		if self._token is not None:
 			auth = 'authorization:'+self._token
 			header = {'Authorization':self._token}
-			return requests.get(url, headers=header)
+			return requests.get(url, headers=header, proxies=self._proxies)
 		else:
 			print("No Authorization Token is set")
 		
@@ -65,7 +66,7 @@ class HttpHandler:
 			for k,v in params.items():
 				url += "&" + k + "=" + v
 
-		print("URL: " + url)
+		print("POST " + url)
 		
 		if self._token is not None:
 			header = {'Authorization':self._token}
@@ -87,7 +88,7 @@ class HttpHandler:
 			for k,v in params.items():
 				url += "&" + k + "=" + v
 
-		print("URL: " + url)
+		print("PUT " + url)
 		
 		if self._token is not None:
 			header = {'Authorization':self._token}
@@ -107,7 +108,7 @@ class HttpHandler:
 			for k,v in params.items():
 				url += "&" + k + "=" + v
 
-		print("URL: " + url)
+		print("DELETE " + url)
 		
 		if self._token is not None:
 			header = {'Authorization':self._token}

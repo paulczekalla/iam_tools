@@ -11,6 +11,7 @@ class AbstractGenericWorker:
 		# for later versions maybe a dict with every plural version
 		allEntities.extend(firstReturn[type+'s'])
 		
+		print('Getting all ' + str(count) + ' items\n')
 		if count > 100:
 			for start_element in range(100, count, 100):
 				# again this plural s implementation 

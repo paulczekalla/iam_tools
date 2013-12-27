@@ -24,7 +24,7 @@ proxies = {
 
 filename = "all_campaign_date.csv"
 
-http = HttpHandler(proxies)
+http = HttpHandler(proxies, "http://api.appnexus.com")
 
 a = Auth("a", "b")
 
