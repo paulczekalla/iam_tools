@@ -18,7 +18,12 @@ def aquireAuthToken(authObj, http):
 	else:
 		http.setToken(token)
 
-http = HttpHandler()
+proxies = {
+  "http": "http://proxy.t-online.net:3128",
+  "https": "http://proxy.t-online.net:3128",
+}
+
+http = HttpHandler(proxies, "http://api.appnexus.com")
 
 a = Auth("a", "b")
 aquireAuthToken(a, http)
