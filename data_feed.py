@@ -28,7 +28,7 @@ http = HttpHandler(proxies, "http://api.appnexus.com")
 a = Auth("a", "b")
 aquireAuthToken(a, http)
 
-feedTypes = ("segment_feed")
+feedTypes = ("bid_landscape_feed")
 
 allDataFeeds = FeedGenerator(http, feedTypes)
 downloader = SiphonDownloader("temp", http)

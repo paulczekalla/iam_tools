@@ -15,7 +15,7 @@ class SiphonDownloader:
 			self.save_file_to_folder(feed_data_file)
 		else:
 			print("Trying again in 15 seconds")
-			time.pause(15)
+			time.sleep(15)
 			self.download_file(params)
 
 	def check_file_downloadable(self, header):
