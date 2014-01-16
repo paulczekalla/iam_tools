@@ -38,7 +38,6 @@ class Auth:
 	def authorizationRequest(self, http=None):
 		if http is not None:
 			self.http = http
-		self.http._baseUrl="http://api.appnexus.com"
 		self.http._service="auth"
 		return self.http.postRequest(self.auth_data)
 

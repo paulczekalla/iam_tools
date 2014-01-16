@@ -24,7 +24,7 @@ proxies = {
 
 filename = "low_running_lineitems.csv"
 
-http = HttpHandler(proxies)
+http = HttpHandler(proxies, "http://api.appnexus.com")
 
 a = Auth("a", "b")
 

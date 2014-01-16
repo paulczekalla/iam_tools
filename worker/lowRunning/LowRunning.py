@@ -46,7 +46,7 @@ class LowRunning:
 				else:
 					end_date_month = last_month + 1
 				
-				if lineItem['state'] != 'inactive' and start_year == current_year and (start_date_month <= current_month or start_date_month <= last_month) and (end_date_month >= current_month or end_date_month >= next_month):
+				if lineItem['state'] != 'inactive' and (start_year == current_year or start_year == current_year-1) and (start_date_month <= current_month or start_date_month <= last_month) and (end_date_month >= current_month or end_date_month >= next_month):
 					allNeverRunLineItems.append(lineItem)
 						
 				else:
