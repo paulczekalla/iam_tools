@@ -1,0 +1,11 @@
+import pandas as pd
+
+columns = ['date_time', 'auction_id_64', 'user_id_64', 'brand_id', 'creative_id', 'actual_bid_price', 'biased_bid_price', 'bid_reject_reason',
+ 'ym_floor_id', 'ym_bias_id', 'bidder_id', 'buyer_member_id', 'seller_member_id', 'total_bid_modifier']
+
+bid12 = pd.read_csv('bid_landscape_feed_2013_10_19_12_20131019134506_0.csv', names=columns, sep='\t')
+bid13 = pd.read_csv('bid_landscape_feed_2013_10_19_13_20131019145233_0.csv', names=columns, sep='\t')
+
+teile = [bid12, bid13]
+
+all_bids = pd.concat(teile, ignore_index=True)
